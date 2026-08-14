@@ -143,6 +143,27 @@ def forgot_password(request):
 
     if request.method == "POST":
 
+        last_otp_sent = request.session.get("otp_sent_at")
+
+        if last_otp_sent:
+
+            elapsed = (timezone.now().timestamp() - last_otp_sent)
+
+            if elapsed < 60:
+
+                remaining = int(60 - elapsed)
+
+                return render(
+                    request,
+                    "accounts/forgot_password.html",
+                    {
+                        "error": (
+                            f"Please wait {remaining} seconds "
+                            "before requesting another OTP."
+                        )
+                    }
+                )
+
         email = request.POST.get(
             "email",
             ""
@@ -162,14 +183,40 @@ def forgot_password(request):
                 }
             )
 
-        # Always show the same response
-        # so account existence is not revealed
-
         user = User.objects.filter(
             email__iexact=email
         ).first()
 
         if user is not None:
+
+            recent_otp = PasswordResetOTP.objects.filter(
+                user=user,
+                verified=False
+            ).order_by(
+                "-created_at"
+            ).first()
+
+            if recent_otp:
+
+                elapsed = (timezone.now() -
+                           recent_otp.created_at).total_seconds()
+
+                if elapsed < 60:
+
+                    remaining = int(
+                        60 - elapsed
+                    )
+
+                    return render(
+                        request,
+                        "accounts/forgot_password.html",
+                        {
+                            "error": (
+                                f"Please wait {remaining} seconds "
+                                "before requesting another OTP."
+                            )
+                        }
+                    )
 
             # Invalidate previous OTPs
 
@@ -211,6 +258,10 @@ def forgot_password(request):
             )
 
         request.session["password_reset_email"] = email
+
+        request.session["otp_sent_at"] = (
+            timezone.now().timestamp()
+        )
 
         return redirect(
             "verify_otp"
@@ -445,6 +496,11 @@ def reset_password(request):
 
         request.session.pop(
             "password_reset_email",
+            None
+        )
+
+        request.session.pop(
+            "otp_sent_at",
             None
         )
 
