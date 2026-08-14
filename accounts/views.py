@@ -11,6 +11,7 @@ from django.conf import settings
 import secrets
 from datetime import timedelta
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.password_validation import validate_password
 
 
 def register_student(request):
@@ -67,6 +68,27 @@ def register_student(request):
                 "accounts/register.html",
                 {
                     "error": "Roll number already exists."
+                }
+            )
+
+        try:
+            validate_password(
+                password,
+                user=User(
+                    username=username,
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name
+                )
+            )
+
+        except ValidationError as e:
+
+            return render(
+                request,
+                "accounts/register.html",
+                {
+                    "error": e.messages[0]
                 }
             )
 
@@ -471,16 +493,19 @@ def reset_password(request):
                 }
             )
 
-        if len(password) < 8:
+        try:
+            validate_password(
+                password,
+                user=user
+            )
+
+        except ValidationError as e:
 
             return render(
                 request,
                 "accounts/reset_password.html",
                 {
-                    "error": (
-                        "Password must be at least "
-                        "8 characters long."
-                    )
+                    "error": e.messages[0]
                 }
             )
 
