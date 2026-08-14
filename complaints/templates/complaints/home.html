@@ -1,0 +1,258 @@
+{% load static %}
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>BBDU Grievance Portal</title>
+
+    <link rel="stylesheet" href="{% static 'complaints/home.css' %}" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+
+        <div>
+          <div class="brand-title">BBDU</div>
+
+          <div class="brand-subtitle">Grievance Portal</div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#about"> About </a>
+
+        <a href="#how-it-works"> How It Works </a>
+
+        <a href="{% url 'login' %}"> Student Login </a>
+
+        <a href="{% url 'register_student' %}"> Create Account </a>
+
+        <a href="{% url 'staff_login' %}"> Staff Login </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <span class="hero-label"> BBDU STUDENT SERVICES </span>
+
+          <h1>
+            Your Voice.
+            <br />
+            <span>Our Response.</span>
+          </h1>
+
+          <p>
+            A simple and transparent way for BBDU students to submit complaints,
+            track their progress, and stay informed until resolution.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="{% url 'login' %}" class="btn btn-primary">
+              Student Login
+            </a>
+
+            <a href="{% url 'register_student' %}" class="btn btn-secondary">
+              Create Account
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="card-header">
+            <span> Complaint Status </span>
+
+            <span class="live-dot"> ● </span>
+          </div>
+
+          <div class="complaint-preview">
+            <div class="preview-top">
+              <span class="preview-id"> BBDU-2026-000004 </span>
+
+              <span class="status-badge"> Under Review </span>
+            </div>
+
+            <h3>Teaching Problem</h3>
+
+            <p>Faculty • Medium Priority</p>
+
+            <div class="progress">
+              <div class="progress-line">
+                <span class="progress-active"></span>
+              </div>
+
+              <div class="progress-labels">
+                <span> Submitted </span>
+
+                <span> Under Review </span>
+
+                <span> Resolved </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <span> ✓ Complaint securely recorded </span>
+
+            <span> BBDU </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-section">
+        <div class="stat">
+          <strong> 24/7 </strong>
+
+          <span> Submit Complaints </span>
+        </div>
+
+        <div class="stat">
+          <strong> 100% </strong>
+
+          <span> Trackable </span>
+        </div>
+
+        <div class="stat">
+          <strong> 6 </strong>
+
+          <span> Complaint Categories </span>
+        </div>
+
+        <div class="stat">
+          <strong> Secure </strong>
+
+          <span> Student Access </span>
+        </div>
+      </section>
+
+      <section class="info-section" id="about">
+        <div class="section-heading">
+          <span> ABOUT THE PORTAL </span>
+
+          <h2>A better way to raise concerns.</h2>
+
+          <p>
+            The BBDU Grievance Portal provides students with a centralized
+            platform to communicate concerns and follow their resolution.
+          </p>
+        </div>
+
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">📝</div>
+
+            <h3>Easy Submission</h3>
+
+            <p>
+              Submit your complaint with the relevant category, priority,
+              subject and description.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🔎</div>
+
+            <h3>Track Progress</h3>
+
+            <p>
+              Monitor the status of your complaint from submission through
+              resolution.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+
+            <h3>Secure Access</h3>
+
+            <p>
+              Your complaints are accessible through your authenticated student
+              account.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="process-section" id="how-it-works">
+        <div class="section-heading">
+          <span> HOW IT WORKS </span>
+
+          <h2>From complaint to resolution.</h2>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">01</div>
+
+            <h3>Login</h3>
+
+            <p>Access your student account securely.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">02</div>
+
+            <h3>Submit</h3>
+
+            <p>Describe your concern and submit your complaint.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">03</div>
+
+            <h3>Track</h3>
+
+            <p>Check the latest status from your dashboard.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">04</div>
+
+            <h3>Resolve</h3>
+
+            <p>Follow the complaint until it is resolved.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div>
+          <span> HAVE A CONCERN? </span>
+
+          <h2>Make your voice heard.</h2>
+
+          <p>Submit your complaint through the BBDU Grievance Portal.</p>
+        </div>
+
+        <a href="{% url 'login' %}" class="btn btn-light"> Get Started → </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <strong> 🎓 BBDU Grievance Portal </strong>
+
+        <p>Student complaint management system.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#about"> About </a>
+
+        <a href="#how-it-works"> How It Works </a>
+
+        <a href="{% url 'login' %}"> Student Login </a>
+
+        <a href="{% url 'register_student' %}"> Create Account </a>
+
+        <a href="/admin/login/"> Staff Login </a>
+      </div>
+    </footer>
+  </body>
+</html>

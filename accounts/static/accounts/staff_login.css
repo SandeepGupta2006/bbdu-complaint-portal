@@ -1,0 +1,208 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+
+    background: #f4f6f9;
+
+    color: #333;
+}
+
+.staff-login-container {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px 20px;
+}
+
+.staff-login-card {
+    width: 100%;
+
+    max-width: 430px;
+
+    background: white;
+
+    padding: 38px 40px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+}
+
+.staff-login-header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-size: 42px;
+
+    margin-bottom: 10px;
+}
+
+.staff-login-header h1 {
+    color: #003366;
+
+    font-size: 25px;
+
+    margin-bottom: 6px;
+}
+
+.staff-login-header p {
+    color: #777;
+
+    font-size: 14px;
+}
+
+.error-message {
+    background: #f8d7da;
+
+    color: #842029;
+
+    border: 1px solid #f5c2c7;
+
+    padding: 12px 15px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    color: #444;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border: 1px solid #d5d9de;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #003366;
+
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.08);
+}
+
+.staff-login-btn {
+    width: 100%;
+
+    border: none;
+
+    background: #003366;
+
+    color: white;
+
+    padding: 12px;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    margin-top: 5px;
+}
+
+.staff-login-btn:hover {
+    background: #00264d;
+}
+
+.student-link {
+    text-align: center;
+
+    margin-top: 22px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #eee;
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+.student-link a {
+    color: #003366;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.student-link a:hover {
+    text-decoration: underline;
+}
+
+.back-link {
+    text-align: center;
+
+    margin-top: 18px;
+
+    font-size: 13px;
+}
+
+.back-link a {
+    color: #777;
+
+    text-decoration: none;
+}
+
+.back-link a:hover {
+    color: #003366;
+}
+
+@media (max-width: 500px) {
+
+    .staff-login-container {
+        padding: 20px 15px;
+    }
+
+    .staff-login-card {
+        padding: 30px 22px;
+    }
+
+    .staff-login-header h1 {
+        font-size: 22px;
+    }
+}

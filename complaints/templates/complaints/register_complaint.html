@@ -1,0 +1,36 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Register Complaint | BBDU</title>
+
+    <link rel="stylesheet" href="{% static 'complaints/register_complaint.css' %}" />
+  </head>
+
+  <body>
+    <div class="form-page">
+      <div class="form-card">
+        <div class="form-header">
+          <a href="{% url 'dashboard' %}" class="back-btn"> ← </a>
+
+          <div>
+            <h1>Register Complaint</h1>
+
+            <p>Submit your grievance to the university administration.</p>
+          </div>
+        </div>
+
+        <form method="POST">
+          {% csrf_token %} {{ form.as_p }}
+
+          <button type="submit" class="submit-btn">Submit Complaint</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,200 @@
+{% load static %}
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Complaints | BBDU Admin</title>
+
+    <link
+      rel="stylesheet"
+      href="{% static 'complaints/admin_dashboard.css' %}"
+    />
+  </head>
+
+  <body>
+    <header class="admin-header">
+      <div class="admin-logo">🎓 BBDU Grievance Portal</div>
+
+      <div class="admin-user">
+        <span> Administrator </span>
+
+        <form method="POST" action="{% url 'admin_logout' %}">
+          {% csrf_token %}
+
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </div>
+    </header>
+
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <h3>ADMIN PORTAL</h3>
+
+        <a href="{% url 'admin_dashboard' %}"> 📊 Dashboard </a>
+
+        <a href="{% url 'admin_complaints' %}" class="active">
+          📋 Complaints
+        </a>
+      </aside>
+
+      <main class="admin-main">
+        <div class="admin-welcome">
+          <h1>All Complaints</h1>
+
+          <p>View and manage complaints submitted by students.</p>
+        </div>
+
+        <section class="complaints-panel">
+          <div class="complaint-filters">
+            <div class="search-box">
+              <input
+                type="text"
+                id="complaintSearch"
+                placeholder="Search complaint ID, student or subject..."
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="filter-row">
+              <select id="statusFilter">
+                <option value="">All Statuses</option>
+
+                <option value="Pending">Pending</option>
+
+                <option value="Under Review">Under Review</option>
+
+                <option value="In Progress">In Progress</option>
+
+                <option value="Resolved">Resolved</option>
+              </select>
+
+              <!-- CATEGORY -->
+
+              <select id="categoryFilter">
+                <option value="">All Categories</option>
+
+                <option value="Academic">Academic</option>
+
+                <option value="Hostel">Hostel</option>
+
+                <option value="Library">Library</option>
+
+                <option value="Transport">Transport</option>
+
+                <option value="Faculty">Faculty</option>
+
+                <option value="Other">Other</option>
+              </select>
+
+              <!-- PRIORITY -->
+
+              <select id="priorityFilter">
+                <option value="">All Priorities</option>
+
+                <option value="Low">Low</option>
+
+                <option value="Medium">Medium</option>
+
+                <option value="High">High</option>
+              </select>
+
+              <!-- CLEAR -->
+
+              <button type="button" id="clearFilters" class="clear-filters">
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <div id="resultsCount" class="results-count">
+            Showing {{ complaints.start_index }}-{{ complaints.end_index }} of
+            {{ paginator.count }} complaints
+          </div>
+
+          <div class="complaint-list" id="complaintList">
+            {% for complaint in complaints %}
+
+            <div
+              class="admin-complaint"
+              data-complaint-id="{{ complaint.complaint_id|lower }}"
+              data-student="{{ complaint.student.user.username|lower }}"
+              data-subject="{{ complaint.subject|lower }}"
+              data-status="{{ complaint.status }}"
+              data-category="{{ complaint.category }}"
+              data-priority="{{ complaint.priority }}"
+            >
+              <!-- COMPLAINT INFORMATION -->
+
+              <div class="complaint-info">
+                <div class="complaint-id">
+                  <a
+                    href="{% url 'admin_update_complaint' complaint.complaint_id %}"
+                  >
+                    {{ complaint.complaint_id }}
+                  </a>
+                </div>
+
+                <div class="complaint-subject">{{ complaint.subject }}</div>
+
+                <div class="complaint-meta">
+                  Student:
+
+                  <strong> {{ complaint.student.user.username }} </strong>
+
+                  <span> • </span>
+
+                  {{ complaint.category }}
+
+                  <span> • </span>
+
+                  {{ complaint.priority }}
+                </div>
+              </div>
+
+              <!-- STATUS -->
+
+              <div class="complaint-status">
+                <span
+                  class="status-badge status-{{ complaint.status|lower|slugify }}"
+                >
+                  {{ complaint.status }}
+                </span>
+              </div>
+            </div>
+
+            {% empty %}
+
+            <!-- DATABASE EMPTY STATE -->
+
+            <div class="empty-state" id="databaseEmpty">
+              <div class="empty-icon">📋</div>
+
+              <h3>No complaints yet</h3>
+
+              <p>No student complaints have been submitted.</p>
+            </div>
+
+            {% endfor %}
+          </div>
+
+          <div id="noResults" class="empty-state" style="display: none">
+            <div class="empty-icon">🔍</div>
+
+            <h3>No matching complaints</h3>
+
+            <p>No complaints match your current search or filters.</p>
+          </div>
+        </section>
+
+        <div id="pagination" class="pagination"></div>
+      </main>
+    </div>
+
+    <script src="{% static 'complaints/admin_complaints.js' %}"></script>
+  </body>
+</html>

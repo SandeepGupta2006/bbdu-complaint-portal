@@ -1,0 +1,270 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Manage Complaint | BBDU</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'complaints/admin_update_complaint.css' %}"
+    >
+
+</head>
+
+<body>
+
+    <header class="admin-header">
+
+        <div class="admin-logo">
+            🎓 BBDU Grievance Portal
+        </div>
+
+        <div class="admin-user">
+
+            <span>
+                Administrator
+            </span>
+
+            <form method="POST" action="{% url 'admin_logout' %}">
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="logout-btn"
+                >
+                    Logout
+                </button>
+
+            </form>
+
+        </div>
+
+    </header>
+
+
+    <main class="update-page">
+
+        <div class="update-card">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="update-header">
+
+                <a
+                    href="{% url 'admin_complaints' %}"
+                    class="back-btn"
+                >
+                    ←
+                </a>
+
+                <div>
+
+                    <h1>
+                        Manage Complaint
+                    </h1>
+
+                    <p>
+                        Review complaint details and update its status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- COMPLAINT ID -->
+
+            <div class="complaint-id-box">
+
+                <span>
+                    Complaint ID
+                </span>
+
+                <strong>
+                    {{ complaint.complaint_id }}
+                </strong>
+
+            </div>
+
+
+            <!-- COMPLAINT DETAILS -->
+
+            <div class="details-section">
+
+                <h2>
+                    Complaint Details
+                </h2>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Student
+                    </span>
+
+                    <span class="detail-value">
+                        {{ complaint.student.user.username }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Category
+                    </span>
+
+                    <span class="detail-value">
+                        {{ complaint.category }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Subject
+                    </span>
+
+                    <span class="detail-value">
+                        {{ complaint.subject }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row description-row">
+
+                    <span class="detail-label">
+                        Description
+                    </span>
+
+                    <div class="description">
+                        {{ complaint.description }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Priority
+                    </span>
+
+                    <span class="priority-badge">
+                        {{ complaint.priority }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Current Status
+                    </span>
+
+                    <span class="status-badge status-{{ complaint.status|lower|slugify }}">
+                        {{ complaint.status }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- UPDATE STATUS -->
+
+            <div class="status-section">
+
+                <h2>
+                    Update Status
+                </h2>
+
+                <p>
+                    Select the new status for this complaint.
+                </p>
+
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <label for="status">
+                        Complaint Status
+                    </label>
+
+
+                    <select
+                        name="status"
+                        id="status"
+                    >
+
+                        <option
+                            value="Pending"
+                            {% if complaint.status == "Pending" %}selected{% endif %}
+                        >
+                            Pending
+                        </option>
+
+
+                        <option
+                            value="Under Review"
+                            {% if complaint.status == "Under Review" %}selected{% endif %}
+                        >
+                            Under Review
+                        </option>
+
+
+                        <option
+                            value="In Progress"
+                            {% if complaint.status == "In Progress" %}selected{% endif %}
+                        >
+                            In Progress
+                        </option>
+
+
+                        <option
+                            value="Resolved"
+                            {% if complaint.status == "Resolved" %}selected{% endif %}
+                        >
+                            Resolved
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="submit"
+                        class="update-btn"
+                    >
+                        Update Status
+                    </button>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

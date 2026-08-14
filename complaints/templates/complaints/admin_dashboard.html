@@ -1,0 +1,160 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Dashboard | BBDU</title>
+
+    <link
+      rel="stylesheet"
+      href="{% static 'complaints/admin_dashboard.css' %}"
+    />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+
+    <header class="admin-header">
+      <div class="admin-logo">🎓 BBDU Grievance Portal</div>
+
+      <div class="admin-user">
+        <span> Administrator </span>
+
+        <form method="POST" action="{% url 'admin_logout' %}">
+          {% csrf_token %}
+
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+
+    <div class="admin-layout">
+      <!-- SIDEBAR -->
+
+      <aside class="admin-sidebar">
+        <h3>ADMIN PORTAL</h3>
+
+        <a href="{% url 'admin_dashboard' %}" class="active"> 📊 Dashboard </a>
+
+        <a href="{% url 'admin_complaints' %}"> 📋 Complaints </a>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+
+      <main class="admin-main">
+        <!-- WELCOME -->
+
+        <div class="admin-welcome">
+          <h1>Complaint Overview</h1>
+
+          <p>Monitor and manage student grievances.</p>
+        </div>
+
+        <!-- STATISTICS -->
+
+        <div class="admin-stats">
+          <div class="admin-stat-card">
+            <div class="stat-label">TOTAL COMPLAINTS</div>
+
+            <div class="stat-number">{{ total_complaints }}</div>
+          </div>
+
+          <div class="admin-stat-card pending">
+            <div class="stat-label">PENDING</div>
+
+            <div class="stat-number">{{ pending_complaints }}</div>
+          </div>
+
+          <div class="admin-stat-card review">
+            <div class="stat-label">UNDER REVIEW</div>
+
+            <div class="stat-number">{{ under_review_complaints }}</div>
+          </div>
+
+          <div class="admin-stat-card progress">
+            <div class="stat-label">IN PROGRESS</div>
+
+            <div class="stat-number">{{ in_progress_complaints }}</div>
+          </div>
+
+          <div class="admin-stat-card resolved">
+            <div class="stat-label">RESOLVED</div>
+
+            <div class="stat-number">{{ resolved_complaints }}</div>
+          </div>
+        </div>
+
+        <!-- RECENT COMPLAINTS -->
+
+        <section class="complaints-panel" id="recent-complaints">
+          <div class="panel-header">
+            <h2>Recent Complaints</h2>
+
+            <p>Latest complaints submitted by students.</p>
+          </div>
+
+          {% if recent_complaints %}
+
+          <div class="complaint-list">
+            {% for complaint in recent_complaints %}
+
+            <div class="admin-complaint">
+              <div class="complaint-info">
+                <div class="complaint-id">
+                  <a
+                    href="{% url 'admin_update_complaint' complaint.complaint_id %}"
+                  >
+                    {{ complaint.complaint_id }}
+                  </a>
+                </div>
+
+                <div class="complaint-subject">{{ complaint.subject }}</div>
+
+                <div class="complaint-meta">
+                  Student:
+                  <strong> {{ complaint.student.user.username }} </strong>
+
+                  <span>•</span>
+
+                  {{ complaint.category }}
+
+                  <span>•</span>
+
+                  {{ complaint.priority }}
+                </div>
+              </div>
+
+              <div class="complaint-status">
+                <span
+                  class="status-badge status-{{ complaint.status|lower|slugify }}"
+                >
+                  {{ complaint.status }}
+                </span>
+              </div>
+            </div>
+
+            {% endfor %}
+          </div>
+
+          {% else %}
+
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+
+            <h3>No complaints yet</h3>
+
+            <p>Student complaints will appear here once submitted.</p>
+          </div>
+
+          {% endif %}
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

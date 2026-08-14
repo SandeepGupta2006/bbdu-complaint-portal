@@ -1,0 +1,121 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Student Dashboard | BBDU</title>
+
+    <link rel="stylesheet" href="{% static 'complaints/dashboard.css' %}" />
+  </head>
+
+  <body>
+
+    <header class="header">
+      <div class="logo">🎓 BBDU Grievance Portal</div>
+
+      <div class="student-info">
+        <span class="student-name"> {{ request.user.username }} </span>
+
+        <form method="POST" action="{% url 'logout' %}">
+          {% csrf_token %}
+
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </div>
+    </header>
+
+
+    <div class="layout">
+
+      <aside class="sidebar">
+        <h3>STUDENT PORTAL</h3>
+
+        <a href="{% url 'dashboard' %}" class="active"> 🏠 Dashboard </a>
+
+        <a href="{% url 'register_complaint' %}"> 📝 Register Complaint </a>
+      </aside>
+
+      <!-- MAIN -->
+
+      <main class="main">
+        <!-- WELCOME -->
+
+        <div class="welcome">
+          <h1>Welcome, {{ request.user.username }}</h1>
+
+          <p>Manage and track your university complaints.</p>
+        </div>
+
+        <!-- STATISTICS -->
+
+        <div class="stats">
+          <div class="stat-card">
+            <h4>TOTAL COMPLAINTS</h4>
+
+            <div class="stat-number">{{ complaints|length }}</div>
+          </div>
+
+          <div class="stat-card">
+            <h4>PENDING</h4>
+
+            <div class="stat-number">{{ pending_count }}</div>
+          </div>
+
+          <div class="stat-card">
+            <h4>RESOLVED</h4>
+
+            <div class="stat-number">{{ resolved_count }}</div>
+          </div>
+        </div>
+
+        <!-- COMPLAINTS -->
+
+        <section class="complaints-section">
+          <div class="section-header">
+            <h2>My Complaints</h2>
+
+            <a href="{% url 'register_complaint' %}" class="new-complaint">
+              + New Complaint
+            </a>
+          </div>
+
+          {% if complaints %} {% for complaint in complaints %}
+
+          <div class="complaint">
+            <div class="complaint-top">
+              <span class="complaint-id"> {{ complaint.complaint_id }} </span>
+
+              <span class="status"> {{ complaint.status }} </span>
+            </div>
+
+            <div class="complaint-subject">{{ complaint.subject }}</div>
+
+            <div class="complaint-meta">
+              {{ complaint.category }} • 
+              {{ complaint.priority }} • 
+              {{ complaint.created_at|date:"d M Y" }}
+            </div>
+          </div>
+
+          {% endfor %} {% else %}
+
+          <div class="empty">
+            <p>You haven't submitted any complaints yet.</p>
+
+            <br />
+
+            <a href="{% url 'register_complaint' %}" class="new-complaint">
+              Register Your First Complaint
+            </a>
+          </div>
+
+          {% endif %}
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

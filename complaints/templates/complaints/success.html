@@ -1,0 +1,50 @@
+{% load static %}
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Complaint Submitted | BBDU</title>
+
+    <link rel="stylesheet" href="{% static 'complaints/success.css' %}" />
+  </head>
+
+  <body>
+    <div class="success-container">
+      <div class="success-card">
+        <div class="success-icon">✓</div>
+
+        <div class="success-header">
+          <h1>Complaint Submitted</h1>
+
+          <p>Your complaint has been successfully registered.</p>
+        </div>
+
+        <div class="complaint-id-box">
+          <span class="id-label"> Your Complaint ID </span>
+
+          <strong class="complaint-id"> {{ complaint_id }} </strong>
+        </div>
+
+        <p class="instruction">
+          Please save your Complaint ID for your records. You can view your complaint status from your student dashboard.
+        </p>
+
+        <div class="success-actions">
+          <a href="{% url 'register_complaint' %}" class="primary-btn">
+            Register Another Complaint
+          </a>
+
+          <a href="{% url 'dashboard' %}" class="secondary-btn">
+            Go to Dashboard
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,431 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #f4f6f9;
+    color: #333;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.admin-header {
+    height: 70px;
+
+    background: #003366;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 35px;
+}
+
+.admin-logo {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.admin-user {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    font-size: 14px;
+}
+
+.admin-user form {
+    margin: 0;
+}
+
+.logout-btn {
+    border: none;
+
+    background: white;
+    color: #003366;
+
+    padding: 8px 16px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #e8edf2;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.update-page {
+    min-height: calc(100vh - 70px);
+
+    padding: 40px 20px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.update-card {
+    width: 100%;
+    max-width: 800px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.update-header {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+}
+
+.update-header h1 {
+    color: #003366;
+
+    font-size: 27px;
+
+    margin-bottom: 5px;
+}
+
+.update-header p {
+    color: #777;
+
+    font-size: 14px;
+}
+
+.back-btn {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    background: #003366;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    background: #00264d;
+
+    transform: translateX(-2px);
+}
+
+
+/* =========================
+   COMPLAINT ID
+========================= */
+
+.complaint-id-box {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    background: #f4f7fa;
+
+    border: 1px solid #e0e5ea;
+
+    border-radius: 8px;
+
+    padding: 16px 18px;
+
+    margin-bottom: 30px;
+}
+
+.complaint-id-box span {
+    color: #777;
+
+    font-size: 13px;
+}
+
+.complaint-id-box strong {
+    color: #003366;
+
+    font-size: 16px;
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+.details-section {
+    border-bottom: 1px solid #e1e4e8;
+
+    padding-bottom: 25px;
+
+    margin-bottom: 25px;
+}
+
+.details-section h2,
+.status-section h2 {
+    color: #003366;
+
+    font-size: 19px;
+
+    margin-bottom: 20px;
+}
+
+.detail-row {
+    display: grid;
+
+    grid-template-columns: 150px 1fr;
+
+    gap: 20px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #f0f1f2;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: #777;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.detail-value {
+    color: #333;
+
+    font-size: 14px;
+}
+
+.description-row {
+    align-items: start;
+}
+
+.description {
+    background: #f8f9fa;
+
+    border-radius: 7px;
+
+    padding: 12px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+.priority-badge,
+.status-badge {
+    display: inline-block;
+
+    width: fit-content;
+
+    padding: 5px 11px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.priority-badge {
+    background: #fff3cd;
+
+    color: #856404;
+}
+
+.status-pending {
+    background: #fff3cd;
+
+    color: #856404;
+}
+
+.status-under-review {
+    background: #d9f3fb;
+
+    color: #087990;
+}
+
+.status-in-progress {
+    background: #e4e8ff;
+
+    color: #4051b5;
+}
+
+.status-resolved {
+    background: #d4edda;
+
+    color: #155724;
+}
+
+
+/* =========================
+   STATUS FORM
+========================= */
+
+.status-section p {
+    color: #777;
+
+    font-size: 13px;
+
+    margin-bottom: 20px;
+}
+
+.status-section label {
+    display: block;
+
+    color: #333;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+.status-section select {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d5d9df;
+
+    border-radius: 7px;
+
+    background: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+}
+
+.status-section select:focus {
+    outline: none;
+
+    border-color: #003366;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 51, 102, 0.08);
+}
+
+.update-btn {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #003366;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.update-btn:hover {
+    background: #00264d;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .admin-header {
+        padding: 0 15px;
+    }
+
+    .admin-logo {
+        font-size: 16px;
+    }
+
+    .admin-user > span {
+        display: none;
+    }
+
+    .update-page {
+        padding: 20px 12px;
+    }
+
+    .update-card {
+        padding: 25px 20px;
+    }
+
+    .update-header h1 {
+        font-size: 22px;
+    }
+
+    .detail-row {
+        grid-template-columns: 1fr;
+
+        gap: 5px;
+    }
+
+    .complaint-id-box {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+}
