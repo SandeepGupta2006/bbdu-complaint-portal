@@ -11,7 +11,7 @@ def student_required(view_func):
     def wrapper(request, *args, **kwargs):
 
         if not hasattr(request.user, "studentprofile"):
-            return redirect("admin_dashboard")
+            return redirect("dashboard")
 
         return view_func(request, *args, **kwargs)
 
