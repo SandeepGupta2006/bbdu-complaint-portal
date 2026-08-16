@@ -16,3 +16,17 @@ def student_required(view_func):
         return view_func(request, *args, **kwargs)
 
     return wrapper
+
+
+def staff_required(view_func):
+
+    @wraps(view_func)
+    @login_required(login_url="/accounts/staff-login/")
+    def wrapper(request, *args, **kwargs):
+
+        if not request.user.is_staff:
+            return redirect("dashboard")
+
+        return view_func(request, *args, **kwargs)
+
+    return wrapper

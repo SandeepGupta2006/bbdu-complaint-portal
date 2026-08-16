@@ -2,9 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from accounts.models import StudentProfile
 from .forms import ComplaintForm
-from django.contrib.admin.views.decorators import staff_member_required
 from .models import Complaint
-from accounts.decorators import student_required
+from accounts.decorators import student_required, staff_required
 from django.shortcuts import get_object_or_404
 
 
@@ -91,7 +90,7 @@ def dashboard(request):
     )
 
 
-@staff_member_required
+@staff_required
 def admin_dashboard(request):
 
     total_complaints = Complaint.objects.count()
@@ -133,7 +132,7 @@ def admin_dashboard(request):
     )
 
 
-@staff_member_required
+@staff_required
 def admin_update_complaint(request, complaint_id):
 
     complaint = get_object_or_404(
@@ -165,7 +164,7 @@ def admin_update_complaint(request, complaint_id):
     )
 
 
-@staff_member_required
+@staff_required
 def admin_complaints(request):
 
     complaints = Complaint.objects.select_related(
