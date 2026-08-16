@@ -26,15 +26,27 @@
       </div>
 
       <nav class="nav-links">
-        <a href="#about"> About </a>
+        <a href="#about">About</a>
 
-        <a href="#how-it-works"> How It Works </a>
+        <a href="#how-it-works">How It Works</a>
 
-        <a href="{% url 'login' %}"> Student Login </a>
+        {% if not user.is_authenticated %}
 
-        <a href="{% url 'register_student' %}"> Create Account </a>
+        <a href="{% url 'login' %}">Student Login</a>
+        <a href="{% url 'register_student' %}">Create Account</a>
+        <a href="{% url 'staff_login' %}">Staff Login</a>
 
-        <a href="{% url 'staff_login' %}"> Staff Login </a>
+        {% elif user.is_staff %}
+
+        <a href="{% url 'admin_dashboard' %}">Staff Dashboard</a>
+        <a href="{% url 'admin_complaints' %}">Complaints</a>
+
+        {% elif user.studentprofile %}
+
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'register_complaint' %}">Register Complaint</a>
+
+        {% endif %}
       </nav>
     </header>
 
@@ -55,6 +67,8 @@
           </p>
 
           <div class="hero-buttons">
+            {% if not user.is_authenticated %}
+
             <a href="{% url 'login' %}" class="btn btn-primary">
               Student Login
             </a>
@@ -62,6 +76,27 @@
             <a href="{% url 'register_student' %}" class="btn btn-secondary">
               Create Account
             </a>
+
+            {% elif user.is_staff %}
+
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-primary">
+              Staff Dashboard
+            </a>
+            <a href="{% url 'admin_complaints' %}" class="btn btn-secondary">
+              Complaints
+            </a>
+
+            {% elif user.studentprofile %}
+
+            <a href="{% url 'dashboard' %}" class="btn btn-primary">
+              Dashboard
+            </a>
+
+            <a href="{% url 'register_complaint' %}" class="btn btn-secondary">
+              Register Complaint
+            </a>
+
+            {% endif %}
           </div>
         </div>
 
@@ -223,8 +258,10 @@
       </section>
 
       <section class="cta-section">
+        {% if not user.is_authenticated %}
+
         <div>
-          <span> HAVE A CONCERN? </span>
+          <span>HAVE A CONCERN?</span>
 
           <h2>Make your voice heard.</h2>
 
@@ -232,6 +269,39 @@
         </div>
 
         <a href="{% url 'login' %}" class="btn btn-light"> Get Started → </a>
+
+        {% elif user.is_staff %}
+
+        <div>
+          <span>STAFF PORTAL</span>
+
+          <h2>Manage student concerns.</h2>
+
+          <p>
+            Review complaints, monitor their progress, and take action through
+            the staff dashboard.
+          </p>
+        </div>
+
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-light">
+          Staff Dashboard →
+        </a>
+
+        {% elif user.studentprofile %}
+
+        <div>
+          <span>HAVE A CONCERN?</span>
+
+          <h2>Make your voice heard.</h2>
+
+          <p>Submit your complaint through the BBDU Grievance Portal.</p>
+        </div>
+
+        <a href="{% url 'register_complaint' %}" class="btn btn-light">
+          Register Complaint →
+        </a>
+
+        {% endif %}
       </section>
     </main>
 
@@ -243,15 +313,41 @@
       </div>
 
       <div class="footer-links">
-        <a href="#about"> About </a>
+        <a href="#about">About</a>
 
-        <a href="#how-it-works"> How It Works </a>
+        <a href="#how-it-works">How It Works</a>
 
-        <a href="{% url 'login' %}"> Student Login </a>
+        {% if not user.is_authenticated %}
 
-        <a href="{% url 'register_student' %}"> Create Account </a>
+        <a href="{% url 'login' %}">Student Login</a>
+        <a href="{% url 'register_student' %}">Create Account</a>
+        <a href="{% url 'staff_login' %}">Staff Login</a>
 
-        <a href="/admin/login/"> Staff Login </a>
+        {% elif user.is_staff %}
+
+        <a href="{% url 'admin_dashboard' %}">Staff Dashboard</a>
+        <a href="{% url 'admin_complaints' %}">Complaints</a>
+
+        <form
+          method="post"
+          action="{% url 'admin_logout' %}"
+          style="display: inline"
+        >
+          {% csrf_token %}
+          <button type="submit" class="nav-logout">Logout</button>
+        </form>
+
+        {% elif user.studentprofile %}
+
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'register_complaint' %}">Register Complaint</a>
+
+        <form method="post" action="{% url 'logout' %}" style="display: inline">
+          {% csrf_token %}
+          <button type="submit" class="nav-logout">Logout</button>
+        </form>
+
+        {% endif %}
       </div>
     </footer>
   </body>

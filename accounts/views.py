@@ -16,6 +16,9 @@ from django.contrib.auth.password_validation import validate_password
 
 def register_student(request):
 
+    if request.user.is_authenticated:
+        return redirect("dashboard")
+
     if request.method == "POST":
 
         username = request.POST.get("username")
@@ -434,6 +437,16 @@ def verify_otp(request):
         )
 
         request.session["password_reset_user"] = user.id
+
+        request.session.pop(
+            "password_reset_email",
+            None
+        )
+
+        request.session.pop(
+            "otp_sent_at",
+            None
+        )
 
         return redirect(
             "reset_password"
