@@ -10,13 +10,21 @@
 
     <title>BBDU Grievance Portal</title>
 
+    <link rel="icon" type="image/png" href="{% static 'complaints/images/bbd_logo.png' %}" />
+
     <link rel="stylesheet" href="{% static 'complaints/home.css' %}" />
   </head>
 
   <body>
     <header class="navbar">
       <div class="brand">
-        <div class="brand-icon">🎓</div>
+         <img
+            src="{% static 'complaints/images/bbd_logo.png' %}"
+            alt="Logo"
+            class="brand-logo"
+            height="60"
+            width="80"
+          />
 
         <div>
           <div class="brand-title">BBDU</div>
