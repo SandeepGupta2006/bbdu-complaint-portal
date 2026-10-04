@@ -94,9 +94,10 @@ Each complaint contains:
 - GitHub
 - VS Code
 
-### Deployment
+### Deployment & Hosting
 
-- Render
+- Web Service: Render
+- Database Hosting: Neon PostgreSQL
 
 ---
 
